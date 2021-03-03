@@ -5,10 +5,9 @@ import ReactGA from "react-ga";
 import { BrowserRouter, Route } from "react-router-dom";
 
 import Routes from "./Routes";
+import Layout from "./Components/Layout";
 
 import "./App.css";
-
-const Layout = (props) => <>{props.children}</>;
 
 const App = () => {
   return (
