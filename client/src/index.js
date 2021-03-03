@@ -12,6 +12,14 @@ console.log("create-react-app env:", process.env.NODE_ENV);
 console.log("firefly project:", process.env.REACT_APP_ENV);
 console.log(process.env);
 
+// Firebase
+const dbConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+};
+Firebase.initializeApp(dbConfig);
+
 // Google Analytics
 // https://github.com/react-ga/react-ga#api
 // ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID)
