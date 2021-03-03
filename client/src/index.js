@@ -19,6 +19,22 @@ const dbConfig = {
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
 };
 Firebase.initializeApp(dbConfig);
+var db = Firebase.firestore();
+
+const testFetchFromFirestore = (collection = "posts") => {
+  try {
+    db.collection("posts")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log({ doc_id: doc.id, doc_data: doc.data() });
+        });
+      });
+  } catch (err) {
+    console.log("Failed:testFetchFromFirestore", err);
+  }
+};
+testFetchFromFirestore();
 
 // Google Analytics
 // https://github.com/react-ga/react-ga#api
