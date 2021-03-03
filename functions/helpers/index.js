@@ -1,11 +1,11 @@
-const ShopifyAPI = require("shopify-api-node");
+// const ShopifyAPI = require("shopify-api-node");
 const config = require("../config");
 const crypto = require("crypto");
 
 module.exports = {
-  openSession(shop) {
-    //...
-  },
+  // openSession(shop) {
+  //   //...
+  // },
 
   generateNonce(bits = 64) {
     let text = "";

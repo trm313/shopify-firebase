@@ -7,7 +7,10 @@
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "env": "firebase functions:config:unset env && firebase functions:config:set app.env=\"$(cat env.json)\"",
+    "env:updateLocal": "firebase functions:config:get > .runtimeconfig.json",
+    "env:setKeysExample": "firebase functions:config:set example.key=<InsertWithQuotes>"
   },
   "engines": {
     "node": "12"

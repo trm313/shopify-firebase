@@ -1,0 +1,13 @@
+{
+  "shopify": {
+    "api_key": "KEY_NOT_SET",
+    "redirect_url": "KEY_NOT_SET",
+    "api_secret_key": "KEY_NOT_SET"
+  },
+  "private": {
+    "env": "dev"
+  },
+  "app": {
+    "name": "Firebase Boilerplate"
+  }
+}

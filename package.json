@@ -6,7 +6,7 @@
   "scripts": {
     "start:client": "cd client && npm start",
     "start:functions": "cd functions && npm run serve",
-    "start:ngrok": "ngrok http 3000",
+    "ngrok:functions": "ngrok http 5001",
     "deploy:client": "firebase deploy --only hosting:shopify-firebase-boilerplate",
     "deploy:functions": "firebase deploy --only functions"
   },
