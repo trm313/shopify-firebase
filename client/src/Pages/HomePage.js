@@ -1,5 +1,4 @@
-import React from "react";
-import { FirestoreCollection } from "react-firestore";
+import React, { useEffect, useState } from "react";
 
 import TestComponent from "../Components/TestComponent";
 import logo from "../logo.svg";
