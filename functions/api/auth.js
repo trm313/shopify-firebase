@@ -1,43 +1,73 @@
 const express = require("express");
-// const Shopify = require("shopify-api-node");
+const axios = require("axios");
+const ShopifyToken = require("shopify-token");
 const router = express.Router();
 const config = require("../config");
-const generateNonce = require("../helpers").generateNonce;
+// const generateNonce = require("../helpers").generateNonce;
+const installStore = require("../helpers/store").installStore;
 
 router.get("/", (req, res) => {
   res.status(200).send("api/auth > Hello World");
 });
 
 router.get("/shopify", (req, res) => {
-  console.log("/shopify", req.query);
-  const shopName = req.query.shop;
-  const nonce = generateNonce();
+  const shop = req.query.shop;
+  if (!shop) return res.status(401).send("Must provide a valid Shopify domain");
+  // 0. Initialize ShopifyToken
 
-  if (!shopName)
-    return res.status(401).send("Must provide a valid Shopify shop");
-
-  // Is there an existing store in Firestore?
-  // ...
-
-  // Per the docs, I'm supposed to redirect them to:
-  // https://{shop}.myshopify.com/admin/oauth/authorize?client_id={api_key}&scope={scopes}&redirect_uri={redirect_uri}&state={nonce}&grant_options[]={access_mode}
-
-  const shopifyConfig = {
+  const shopifyToken = new ShopifyToken({
+    redirectUri: config.SHOPIFY_REDIRECT_URL,
+    sharedSecret: config.SHOPIFY_API_SECRET_KEY,
     apiKey: config.SHOPIFY_API_KEY,
-    secret: config.SHOPIFY_API_SECRET_KEY,
-    scopes: ["read_products"],
-    redirectUri: `${config.SHOPIFY_REDIRECT_URL}/auth/shopify/callback`,
-    accessMode: "offline", // NOTE - I think I may want "per-user" (online) mode? since I'm not really doing any background work. That would be something to maintain in session storage or something, whereas offline access is a permanent token
-    nonce,
-  };
+    shop: req.query.shop,
+  });
 
-  let redirectUrl = `https://${shopName}/admin/oauth/authorize?client_id=${shopifyConfig.apiKey}&scope=${shopifyConfig.scopes}&redirect_uri=${shopifyConfig.redirectUri}&state=${shopifyConfig.nonce}&grant_options[]=${shopifyConfig.accessMode}`;
-  res.redirect(redirectUrl);
+  // 1. Generate nonce
+  const nonce = shopifyToken.generateNonce();
+
+  // 2. Generate authorization URL
+  const uri = shopifyToken.generateAuthUrl(shop, "read_products", nonce);
+
+  // 3. Save the nonce somewhere to verify it later
+  req.session.state = nonce;
+  installStore(shop, nonce).then(() => {
+    res.redirect(uri);
+  });
 });
 
 router.get("/shopify/callback", (req, res) => {
-  console.log("/shopify/callback", req.query);
-  res.status(200).send({ route: "GET /shopify/callback", quer: req.query });
+  const { code, shop, state } = req.query;
+  const shopifyToken = new ShopifyToken({
+    redirectUri: config.SHOPIFY_REDIRECT_URL,
+    sharedSecret: config.SHOPIFY_API_SECRET_KEY,
+    apiKey: config.SHOPIFY_API_KEY,
+    shop: req.query.shop,
+  });
+
+  if (
+    typeof state !== "string" ||
+    state !== req.session.state || // Validate that the state (nonce) is the same
+    !shopifyToken.verifyHmac(req.query) // Validate the Hmac calculates properly
+  ) {
+    return res.status(400).send("Shopify integration security checks failed");
+  }
+
+  // Exchange the authorization code for a permanent access token.
+  shopifyToken
+    .getAccessToken(shop, code)
+    .then((data) => {
+      const token = data.access_token;
+      console.log("token", token);
+
+      req.session.token = token;
+      req.session.state = undefined;
+      console.log("SUCCESSFULLY INTEGRATED TO SHOPIFY");
+      res.redirect("http://localhost:3000");
+    })
+    .catch((err) => {
+      console.error(err.stack);
+      res.status(500).send("Something went wrong integrating to Shopify");
+    });
 });
 
 module.exports = router;

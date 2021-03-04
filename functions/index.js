@@ -1,7 +1,19 @@
-const functions = require("firebase-functions");
 const express = require("express");
+const session = require("express-session");
+const admin = require("firebase-admin");
+const functions = require("firebase-functions");
+
+admin.initializeApp(functions.config().firebase);
 
 const app = express();
+
+app.use(
+  session({
+    secret: "eo3Athuo4Ang5gai",
+    saveUninitialized: false,
+    resave: false,
+  })
+);
 
 const apiRoutes = require("./api");
 app.use("/api", apiRoutes);
