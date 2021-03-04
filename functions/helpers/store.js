@@ -8,10 +8,11 @@ const admin = require("firebase-admin");
  *  owner: owner_id
  */
 
-exports.installStore = (shopName, nonce) => {
-  return admin.firestore().collection("store").doc(shopName).set({
+exports.installStore = async (shop, accessToken) => {
+  const doc = await admin.firestore().collection("store");
+  return admin.firestore().collection("store").add({
     type: "shopify",
-    shopName: shopName,
-    nonce: nonce,
+    shop,
+    accessToken,
   });
 };

@@ -1,10 +1,9 @@
 const express = require("express");
-const axios = require("axios");
 const ShopifyToken = require("shopify-token");
 const router = express.Router();
 const config = require("../config");
 // const generateNonce = require("../helpers").generateNonce;
-const installStore = require("../helpers/store").installStore;
+// const installStore = require("../helpers/store").installStore;
 
 router.get("/", (req, res) => {
   res.status(200).send("api/auth > Hello World");
@@ -28,11 +27,9 @@ router.get("/shopify", (req, res) => {
   // 2. Generate authorization URL
   const uri = shopifyToken.generateAuthUrl(shop, "read_products", nonce);
 
-  // 3. Save the nonce somewhere to verify it later
+  // 3. Save the nonce to verify it later
   req.session.state = nonce;
-  installStore(shop, nonce).then(() => {
-    res.redirect(uri);
-  });
+  res.redirect(uri);
 });
 
 router.get("/shopify/callback", (req, res) => {
@@ -62,7 +59,11 @@ router.get("/shopify/callback", (req, res) => {
       req.session.token = token;
       req.session.state = undefined;
       console.log("SUCCESSFULLY INTEGRATED TO SHOPIFY");
-      res.redirect("http://localhost:3000");
+      // TODO:
+      // Save store via installStore() ?
+      // Send access_token back to frontend or something?
+      // Where to redirect to?
+      res.redirect(`${config.CLIENT_URL}/login?shop=${shop}&token=${token}`);
     })
     .catch((err) => {
       console.error(err.stack);

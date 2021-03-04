@@ -4,10 +4,10 @@
     "redirect_url": "KEY_NOT_SET",
     "api_secret_key": "KEY_NOT_SET"
   },
-  "private": {
-    "env": "dev"
-  },
   "app": {
-    "name": "Firebase Boilerplate"
+    "name": "Firebase Boilerplate",
+    "env": "dev",
+    "client_url": "http://localhost:3000",
+    "api_url": "http://localhost:5001/firebaseprojectname/us-central1/app/api"
   }
 }

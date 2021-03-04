@@ -6,6 +6,7 @@ import { Switch, Route } from "react-router-dom";
 
 // Pages
 import HomePage from "../Pages/HomePage";
+import Login from "../Pages/Login";
 const Account = () => (
   <div>
     <h1>Account</h1>
@@ -25,6 +26,7 @@ const PostEdit = () => (
 const Routes = () => (
   <Switch>
     <Route exact path='/' component={HomePage} />
+    <Route exact path='/login' component={Login} />
     <Route path='/account' component={Account} />
     <Route path='/:slug/edit' component={PostEdit} />
     <Route path='/:slug' component={Post} />
