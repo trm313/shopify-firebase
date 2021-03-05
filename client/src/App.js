@@ -18,6 +18,7 @@ const App = () => {
     // Initialize Firebase authentication listener
     Firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        // const { displayName, email, emailVerified, uid } = user;
         console.log(`onAuthStateChanged> ${user.email} logged in`);
       }
 

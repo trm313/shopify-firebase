@@ -63,12 +63,22 @@ router.get("/shopify/callback", (req, res) => {
       // Save store via installStore() ?
       // Send access_token back to frontend or something?
       // Where to redirect to?
-      res.redirect(`${config.CLIENT_URL}/login?shop=${shop}&token=${token}`);
+      res.redirect(
+        `${config.CLIENT_URL}/shopify-login?shop=${shop}&token=${token}`
+      );
     })
     .catch((err) => {
       console.error(err.stack);
       res.status(500).send("Something went wrong integrating to Shopify");
     });
 });
+
+// router.post("/shopify/checkOrCreateIntegration", (req, res) => {
+//   const { shop, token, useruid } = req.body;
+//   if (!shop || !token || !useruid)
+//     return res.status(401).send("Unable to authenticate Shopify integration");
+
+//   res.status(200).json({ shop, token, useruid });
+// });
 
 module.exports = router;

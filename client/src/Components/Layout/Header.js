@@ -3,7 +3,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { Flex, Box, Button, Link } from "@chakra-ui/react";
 import NavLink from "../Shared/NavLink";
 import logOut from "../../Actions/logOut";
-import FirebaseAuth from "../Shared/FirebaseAuth";
+import FirebaseAuth from "../Auth/FirebaseAuth";
 
 const Header = (props) => {
   return (

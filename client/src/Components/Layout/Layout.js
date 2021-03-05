@@ -1,4 +1,4 @@
-import FirebaseAuth from "../Shared/FirebaseAuth";
+import FirebaseAuth from "../Auth/FirebaseAuth";
 import logOut from "../../Actions/logOut";
 
 import Header from "./Header";
