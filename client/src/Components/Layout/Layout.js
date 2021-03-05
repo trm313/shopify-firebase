@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom";
+import FirebaseAuth from "../Shared/FirebaseAuth";
+import logOut from "../../Actions/logOut";
+
+import Header from "./Header";
 
 const Layout = (props) => {
   return (
     <div>
       <div>
-        <Link to='/'>Home</Link>
-        <Link to='account'>Account</Link>
-        <Link to='slug-123'>Some Post</Link>
+        <Header />
       </div>
       {props.children}
     </div>

@@ -1,8 +1,9 @@
 import React from "react";
+import ReactGA from "react-ga";
 import Firebase from "firebase/app";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
-const LoginForm = (props) => {
+const LoginForm = ({ onSignInSuccess }) => {
   // FirebaseUI Config
   const uiConfig = {
     // Disable Account Chooser redirect
@@ -11,26 +12,33 @@ const LoginForm = (props) => {
     signInFlow: "popup",
     callbacks: {
       signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-        var user = authResult.user;
-        var credential = authResult.credential;
-        var isNewUser = authResult.additionalUserInfo.isNewUser;
-        var providerId = authResult.additionalUserInfo.providerId;
-        var operationType = authResult.operationType;
-        // console.log(authResult);
+        const { user } = authResult;
+        // var credential = authResult.credential;
+        // var isNewUser = authResult.additionalUserInfo.isNewUser;
+        // var providerId = authResult.additionalUserInfo.providerId;
+        // var operationType = authResult.operationType;
+
+        ReactGA.event({
+          category: "User",
+          action: "Log in",
+        });
+
+        // console.log(user);
+        const { displayName, email, emailVerified, uid } = user;
 
         // Do something with the returned AuthResult.
         // Return type determines whether we continue the redirect automatically
         // or whether we leave that to developer to handle.
 
-        // onSignInSuccess(authResult);
+        onSignInSuccess({ displayName, email, emailVerified, uid });
 
-        // return true; // would redirect
-        return false;
+        return true; // would redirect
+        // return false; // Don't redirect
       },
     },
 
     // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-    // signInSuccessUrl: '/dashboard',
+    signInSuccessUrl: "/",
     // Signin Providers
     signInOptions: [
       // firebase.auth.EmailAuthProvider.PROVIDER_ID,

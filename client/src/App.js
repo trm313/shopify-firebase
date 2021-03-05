@@ -3,6 +3,9 @@ import { FirestoreProvider } from "react-firestore";
 import React from "react";
 import ReactGA from "react-ga";
 import { BrowserRouter, Route } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
+
+import theme from "./Styles/theme";
 
 import Routes from "./Routes";
 import Layout from "./Components/Layout";
@@ -12,13 +15,15 @@ import "./App.css";
 const App = () => {
   return (
     <FirestoreProvider firebase={Firebase}>
-      <BrowserRouter>
-        <Layout>
-          {/* <Route path='/' component={ScrollToTop} />
+      <ChakraProvider theme={theme}>
+        <BrowserRouter>
+          <Layout>
+            {/* <Route path='/' component={ScrollToTop} />
           <Route path='/' component={Analytics} /> */}
-          <Routes />
-        </Layout>
-      </BrowserRouter>
+            <Routes />
+          </Layout>
+        </BrowserRouter>
+      </ChakraProvider>
     </FirestoreProvider>
   );
 };

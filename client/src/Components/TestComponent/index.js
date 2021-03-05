@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import Firebase from "firebase/app";
 import { FirestoreCollection } from "react-firestore";
-import { Link } from "react-router-dom";
+import NavLink from "../Shared/NavLink";
 
 const TestComponent = (props) => {
   const [posts, setPosts] = useState(null);
@@ -51,7 +51,9 @@ const TestComponent = (props) => {
               <p>Posts: {data.length}</p>
               {data.map((post) => (
                 <div>
-                  <Link to={`/${post.slug}`}>{post.title}</Link>
+                  <NavLink to={`/${post.slug}`} variant='link' size='lg'>
+                    {post.title}
+                  </NavLink>
                 </div>
               ))}
             </div>

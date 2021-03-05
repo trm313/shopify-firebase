@@ -4,6 +4,7 @@ const development = require("./development");
 
 // Load environment variables from Firebase
 // Set environment variables using scripts in functions/package.json
+// Local environment variables are set in .runtimeconfig.json (see .runtimeconfig.json.example for structure)
 let env = functions.config();
 
 const config = {
