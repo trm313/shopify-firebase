@@ -21,12 +21,10 @@ const App = ({ authenticate, logout }) => {
     Firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const { displayName, email, emailVerified, uid } = user;
-        console.log(`onAuthStateChanged> ${user.email} logged in`);
         authenticate({ displayName, email, emailVerified, uid });
       }
 
       if (!user) {
-        console.log("onAuthStateChanged> user logged out");
         logout();
       }
     });
