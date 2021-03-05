@@ -1,9 +1,12 @@
 import Firebase from "firebase/app";
 import { FirestoreProvider } from "react-firestore";
 import React, { useState, useEffect } from "react";
+import { useSelector, connect } from "react-redux";
 import ReactGA from "react-ga";
 import { BrowserRouter, Route } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
+
+import { authenticate, logout } from "./Reducers/authReducer";
 
 import theme from "./Styles/theme";
 
@@ -12,17 +15,20 @@ import Layout from "./Components/Layout";
 
 import "./App.css";
 
-const App = () => {
-  const [user, setUser] = useState(null);
+const App = ({ authenticate, logout }) => {
   useEffect(() => {
     // Initialize Firebase authentication listener
     Firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // const { displayName, email, emailVerified, uid } = user;
+        const { displayName, email, emailVerified, uid } = user;
         console.log(`onAuthStateChanged> ${user.email} logged in`);
+        authenticate({ displayName, email, emailVerified, uid });
       }
 
-      if (!user) console.log("onAuthStateChanged> user logged out");
+      if (!user) {
+        console.log("onAuthStateChanged> user logged out");
+        logout();
+      }
     });
   }, []);
   return (
@@ -62,4 +68,9 @@ const App = () => {
 //   return null
 // }
 
-export default App;
+// export default App;
+const mapDispatch = {
+  authenticate,
+  logout,
+};
+export default connect(null, mapDispatch)(App);

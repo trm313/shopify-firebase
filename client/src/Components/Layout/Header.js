@@ -1,9 +1,9 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { Flex, Box, Button, Link } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { Flex, Box, Button, Link, Spinner } from "@chakra-ui/react";
 import NavLink from "../Shared/NavLink";
-import logOut from "../../Actions/logOut";
-import FirebaseAuth from "../Auth/FirebaseAuth";
+
+import AuthButtons from "../Auth/AuthButtons";
 
 const Header = (props) => {
   return (
@@ -22,30 +22,7 @@ const Header = (props) => {
         <NavLink to='slug-123'>Some Post</NavLink>
       </Box>
       <Box>
-        <FirebaseAuth>
-          {({ isLoading, error, auth }) => {
-            if (isLoading) {
-              return <Box>Loading</Box>;
-            }
-            if (error) {
-              return <Box>Login Error</Box>;
-            }
-            if (auth) {
-              return (
-                <>
-                  <NavLink to='/account'>Profile</NavLink>
-                  <NavLink onClick={logOut}>Log Out</NavLink>
-                </>
-              );
-            } else {
-              return (
-                <NavLink to='/login' size='lg' variant='primary'>
-                  Login
-                </NavLink>
-              );
-            }
-          }}
-        </FirebaseAuth>
+        <AuthButtons />
       </Box>
     </Flex>
   );

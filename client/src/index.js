@@ -3,10 +3,15 @@ import "firebase/auth";
 import "firebase/firestore";
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ReactGA from "react-ga";
+
+import rootReducer from "./Reducers";
 
 console.log("create-react-app env:", process.env.NODE_ENV);
 console.log("firefly project:", process.env.REACT_APP_ENV);
@@ -43,9 +48,15 @@ Firebase.auth()
 // https://docs.sentry.io/clients/javascript/integrations/react/
 // window.Raven.config(process.env.REACT_APP_SENTRY_RAVEN_TRACKING_URL).install()
 
+const store = configureStore({
+  reducer: rootReducer,
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

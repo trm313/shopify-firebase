@@ -1,5 +1,4 @@
-import FirebaseAuth from "../Auth/FirebaseAuth";
-import logOut from "../../Actions/logOut";
+import React from "react";
 
 import Header from "./Header";
 
