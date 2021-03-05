@@ -20,6 +20,21 @@ const dbConfig = {
 };
 Firebase.initializeApp(dbConfig);
 
+Firebase.auth()
+  .setPersistence(Firebase.auth.Auth.Persistence.LOCAL)
+  .then(() => {
+    // Existing and future Auth states are now persisted in the current
+    // session only. Closing the window would clear any existing state even
+    // if a user forgets to sign out.
+    // ...
+  })
+  .catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.error(errorCode, errorMessage);
+  });
+
 // Google Analytics
 // https://github.com/react-ga/react-ga#api
 // ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID)

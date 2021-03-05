@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useReducer } from "react";
 import Firebase from "firebase/app";
 import { FirestoreCollection } from "react-firestore";
+
+import { Spinner } from "@chakra-ui/react";
 import NavLink from "../Shared/NavLink";
 
 const TestComponent = (props) => {
@@ -39,7 +41,7 @@ const TestComponent = (props) => {
           }
 
           if (isLoading) {
-            return <p>Loading...</p>;
+            return <Spinner color='brand.800' />;
           }
 
           if (data.length === 0) {

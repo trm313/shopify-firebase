@@ -7,6 +7,9 @@ const logOut = () => {
     action: "Log out",
   });
 
+  // Firebase.auth().signOut();
+  // history.something = "/" // TODO: Redirect
+
   return Firebase.auth().signOut();
 };
 

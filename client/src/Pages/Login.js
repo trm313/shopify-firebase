@@ -1,5 +1,7 @@
 import React from "react";
 import qs from "query-string";
+
+import logIn from "../Actions/logIn";
 import LoginForm from "../Components/LoginForm";
 
 const Login = (props) => {
@@ -12,7 +14,7 @@ const Login = (props) => {
   }
 
   const handleLogin = (user) => {
-    console.log("Login: ", user);
+    logIn(user);
   };
 
   return (

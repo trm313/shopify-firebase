@@ -1,6 +1,6 @@
 import Firebase from "firebase/app";
 import { FirestoreProvider } from "react-firestore";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactGA from "react-ga";
 import { BrowserRouter, Route } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -13,6 +13,17 @@ import Layout from "./Components/Layout";
 import "./App.css";
 
 const App = () => {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    // Initialize Firebase authentication listener
+    Firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log(`onAuthStateChanged> ${user.email} logged in`);
+      }
+
+      if (!user) console.log("onAuthStateChanged> user logged out");
+    });
+  }, []);
   return (
     <FirestoreProvider firebase={Firebase}>
       <ChakraProvider theme={theme}>

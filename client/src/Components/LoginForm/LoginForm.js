@@ -32,8 +32,8 @@ const LoginForm = ({ onSignInSuccess }) => {
 
         onSignInSuccess({ displayName, email, emailVerified, uid });
 
-        return true; // would redirect
-        // return false; // Don't redirect
+        // return true; // would redirect
+        return false; // Don't redirect
       },
     },
 
