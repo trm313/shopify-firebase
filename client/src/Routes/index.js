@@ -50,7 +50,7 @@ const Routes = () => (
     <Route exact path='/login' component={Login} />
     <PrivateRoute exact path='/shopify-login' component={ShopifyLogin} />
     <PrivateRoute path='/account' component={Account} />
-    <Route path='/:slug/edit' component={PostEdit} />
+    <PrivateRoute path='/:slug/edit' component={PostEdit} />
     <Route path='/:slug' component={Post} />
   </Switch>
 );
