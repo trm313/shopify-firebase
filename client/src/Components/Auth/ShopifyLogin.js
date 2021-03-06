@@ -1,54 +1,39 @@
 import React, { useEffect, useState } from "react";
-import Firebase from "firebase/app";
+import { useSelector } from "react-redux";
 import qs from "query-string";
-import { Spinner, Box, Text } from "@chakra-ui/react";
+import { Redirect } from "react-router-dom";
+import LoadingScreen from "../Layout/LoadingScreen";
+import integrateShopify from "../../Actions/Integrations/integrateShopify";
 
 const ShopifyLogin = (props) => {
-  const [user, setUser] = useState(null);
+  const auth = useSelector((store) => store.auth);
+  const [redirectTo, setRedirect] = useState(null);
+  const [error, setError] = useState(null);
 
   // Check for query strings passed from /auth/shopify/callback
   const params = qs.parse(props.location.search);
   const { shop = null, token = null } = params;
 
   useEffect(() => {
-    // Initialize Firebase authentication listener
-    Firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        const { displayName, email, emailVerified, uid } = user;
-        setUser({ displayName, email, emailVerified, uid });
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    if (shop && token && user) {
-      console.log("Proceed with Shopify integration", {
-        shop,
-        token,
-        user,
-      });
+    if (shop && token && auth.isAuthenticated) {
+      integrateShopify(shop, token, () => setRedirect("/"), setError);
     }
-  }, [shop, token, user]);
+
+    if (!shop || !token) {
+      setError("Unable to verify Shopify store details");
+    }
+  }, [shop, token, auth]);
 
   return (
-    <Box
-      w='100vw'
-      h='100vh'
-      backgroundColor='brand.800'
-      color='white'
-      pos='absolute'
-      top={0}
-      right={0}
-      left={0}
-      bottom={0}
-      display='flex'
-      justifyContent='center'
-      alignItems='center'
-      flexDirection='column'
+    <LoadingScreen
+      text='Loading'
+      subtext='Getting your shopify store ready'
+      error={error}
+      errorRedirectTo='/'
+      errorRedirectDelay={10000}
     >
-      <Spinner size='xl' />
-      <Text my={8}>Getting your Shopify store ready</Text>
-    </Box>
+      {redirectTo && <Redirect to={redirectTo} />}
+    </LoadingScreen>
   );
 };
 
