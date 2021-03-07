@@ -3,6 +3,8 @@
 
 ---
 
+<hr>
+<hr>
 <h1 id="setup">Setup</h1>
 <h2 id="installation">Installation</h2>
 <p><strong>Repo setup</strong></p>
@@ -87,35 +89,31 @@ Deploy files to hosting via <code>firebase deploy --only hosting:shopify-firebas
 <pre><code>// 1. `client\src\index.js` - Initialize Cloud Functions through Firebase
 firebase.initializeApp({ ... });
 var functions = firebase.functions();
+</code></pre></li></ul></li></ul><p>// 2. <code>client\src\Components\TextComponent</code> - Load Firebase and call directly<br>
+import Firebase from “firebase/app”;<br>
+var addMessage = Firebase.functions().httpsCallable(‘addMessage’);</p>
+<p>addMessage({ text: messageText })<br>
+.then((result) =&gt; {<br>
+// Read result of the Cloud Function.<br>
+var sanitizedMessage = result.data.text;<br>
+}).catch (error =&gt; {<br>
+const { code, message, details } = error;<br>
+})</p>
+<p></p>
 
-// 2. `client\src\Components\TextComponent` - Load Firebase and call directly
-import Firebase from "firebase/app";
-var addMessage = Firebase.functions().httpsCallable('addMessage');
-
-addMessage({ text: messageText })
-.then((result) =&gt; {
-  // Read result of the Cloud Function.
-var sanitizedMessage = result.data.text;
-}).catch (error =&gt; {
-  const { code, message, details } = error;
-})
-
-</code></pre>
-</li>
 <li>
 <p>Call functions via HTTP requests</p>
 <pre><code>// https://firebase.google.com/docs/functions/http-events?authuser=0
+</code></pre></li><p></p>
 
-</code></pre>
-</li>
 <li>
 <p>Host API routes (Currently eg. <code>/auth/shopify</code> and <code>/auth/shopifycallback</code>)</p>
 <ul>
 <li>Note: This probably should be done through calling Firebase Functions via HTTP, but shows some flexibility</li>
 </ul>
 </li>
-</ul>
-</li>
+
+
 <li>
 <p>Firebase Firestore</p>
 <ul>
@@ -128,7 +126,7 @@ var sanitizedMessage = result.data.text;
 <li>Shopify - This boilerplate can serve as a grab-and-go Shopify Public App</li>
 </ul>
 </li>
-</ul>
+
 <h1 id="integrations">Integrations</h1>
 <h2 id="shopify">Shopify</h2>
 <p>Shopify has a very nice app ecosystem. A Shopify app is simply a website that follows certain authentication protocols, so it’s very flexible about any technologies you want to use. They have some great resources and walkthroughs as well.</p>
