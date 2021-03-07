@@ -24,7 +24,7 @@
 1. Copy/rename `client\.env.example` to `client\.env` and populate with environment variables to be leveraged by the React client (TODO: Figure out how to deploy these to Firebase hosting)
 
 ## Development Environment
-
+1. TODO
 
 ## Production Environment
 
@@ -100,6 +100,9 @@ Environment variables for consumption by Firebase Functions:
 
 - Firebase Firestore
   - Document store
+- Integrations
+	- Shopify App
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzU4NTMzODA2XX0=
+eyJoaXN0b3J5IjpbLTE5ODUyMjUzMDFdfQ==
 -->
