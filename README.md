@@ -106,9 +106,13 @@ Environment variables for consumption by Firebase Functions:
 # Integrations
 ## Shopify
 
-Shopify has a very nice app ecosystem. A Shopify app is simply a website that follows certain authentication protocols, so it's very flexible about any technologies you want to use. They ha
+Shopify has a very nice app ecosystem. A Shopify app is simply a website that follows certain authentication protocols, so it's very flexible about any technologies you want to use. They have some great resources and walkthroughs as well.
+
+There are two types of Shopify apps: 
+- Public - An app listed on their App Store, available to the general public. Subscriptions, on-demand billing through Shopify
+- Private - An app not listed on their App Store, that you would provide to a single customer that they manually manage the installation of
 The workflow for a website to be 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ2NjAwNDczMF19
+eyJoaXN0b3J5IjpbNjY3NzIwNTIwXX0=
 -->
