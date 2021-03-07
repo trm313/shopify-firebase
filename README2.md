@@ -27,8 +27,6 @@
 
 1. TODO
 
-1. TODO
-
 ## Production Environment
 
 1. Set environment variables for Firebase functions using `functions ... :set ...`
