@@ -61,11 +61,11 @@ Reducers: client\src\Reducers`
   - Call functions directly from Web
 
     ```
-    // 1. `client\src\index.js` - Initialize Cloud Functions through Firebase
+    // 1. client\src\index.js - Initialize Cloud Functions through Firebase
     firebase.initializeApp({ ... });
     var functions = firebase.functions();
 
-    // 2. `client\src\Components\TextComponent - Load Firebase and call directly
+    // 2. client\src\Components\TextComponent - Load Firebase and call directly
     import Firebase from firebase/app";
     var addMessage = Firebase.functions().httpsCallable(addMessage);
     addMessage({ text: messageText })
@@ -80,7 +80,7 @@ p>    })
 
   - Call functions via HTTP requests
 
-    ```
+
     // https://firebase.google.com/docs/functions/http-events?authuser=0
 
 >
@@ -104,5 +104,5 @@ Shopify has a very nice app ecosystem. A Shopify app is simply a website that fo
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTE5MjY5NTIxXX0=
+eyJoaXN0b3J5IjpbNjc0MDg0MzddfQ==
 -->
