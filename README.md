@@ -2,16 +2,16 @@
 
 ## Installation
 
-** Repo setup **
+**Repo setup**
 
 1. Clone repository
 1. Run `npm install` in the root, `client`, `scripts`, and `functions` directories
 
-** Shopify setup **
+**Shopify setup**
 
 1. ...
 
-** Firebase setup **
+**Firebase setup**
 
 1. Create your Firebase project. Resources we will be using:
 
@@ -24,6 +24,7 @@
 1. Copy/rename `client\.env.example` to `client\.env` and populate with environment variables to be leveraged by the React client (TODO: Figure out how to deploy these to Firebase hosting)
 
 ## Development Environment
+
 
 ## Production Environment
 
@@ -99,3 +100,6 @@ Environment variables for consumption by Firebase Functions:
 
 - Firebase Firestore
   - Document store
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNzU4NTMzODA2XX0=
+-->
