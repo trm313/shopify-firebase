@@ -1,29 +1,11 @@
----
-
-
----
-
-<h1 id="setup">Setup</h1>
-<h2 id="installation">Installation</h2>
-<p><strong>Repo setup</strong></p>
-<ol>
-<li>Clone repository</li>
-<li>Run <code># Setup
+# Setup
 
 ## Installation
 
 **Repo setup**
 
 1. Clone repository
-1. Run `npm install</code>` in the root, <code>client</code>, <code>scripts</code>, and <code>`client`, `scripts`, and `functions</code>` directories</li>
-</ol>
-<p><strong>Shopify setup</strong></p>
-<ol>
-<li>…</li>
-</ol>
-<p><strong>Firebase setup</strong></p>
-<ol>
-<li>
+1. Run `npm install` in the root, `client`, `scripts`, and `functions` directories
 
 **Shopify setup**
 
@@ -31,127 +13,90 @@
 
 **Firebase setup**
 
-1. Create your Firebase project. Resources we will be using:</li>
-</ol>
-<ul>
-<li>Authentication (Google provider)</li>
-<li>
-- Cloud Firestore</li>
-<li>Hosting</li>
-<li>Functions (will require upgrade to Blaze pay-as-you-go plan - it has good free quotas and billing alerts, so no surprises)</li>
-</ul>
-<ol>
-<li>Copy/rename <code>`functions\.runtimeconfig.example.json</code> to <code>functions\.runtimeconfig.json</code>` and populate with environment variables for your local development environment</li>
-<li>
-1. Copy/rename <code>`client\.env.example</code> to <code>client\.env</code>` and populate with environment variables to be leveraged by the React client (TODO: Figure out how to deploy these to Firebase hosting)</li>
-</ol>
-<h2 id="development-environment">Development Environment</h2>
-<ol>
-<li>TODO</li>
-</ol>
-<h2 id="production-environment">Production Environment</h2>
-<ol>
-<li>Set environment variables for Firebase functions using <code>`functions ... :set ...</code><br>
-…</li>
-</ol>
-<h1 id="deploying-application">Deploying Application</h1>
-<h2 id="deploy-frontend">Deploy Frontend</h2>
-<p>
+1. Create your Firebase project. Resources we will be using:
 
-Files must build to a deployment directory (default is “"public, changed to “"client/build”)<br>")
-Deploy files to hosting via <code>`firebase deploy --only hosting:shopify-firebase-boilerplate</code></p>
-<h2 id="environment-variables">Environment variables</h2>
-<p>
+- Authentication (Google provider)
+- Cloud Firestore
+- Hosting
+- Functions (will require upgrade to Blaze pay-as-you-go plan - it has good free quotas and billing alerts, so no surprises)
 
-Environment variables for consumption by Firebase Functions:</p>
-<p><code>
+1. Copy/rename `functions\.runtimeconfig.example.json` to `functions\.runtimeconfig.json` and populate with environment variables for your local development environment
+1. Copy/rename `client\.env.example` to `client\.env` and populate with environment variables to be leveraged by the React client (TODO: Figure out how to deploy these to Firebase hosting)
 
-`firebase functions:config:get</code></p>
-<p><codefirebase functions:config:set private.env="dev" stripe.key="[stripe_key]" stripe.secret="[stripe_secret]"</code></p>
-<p><code>firebase functions:config:set private.key="YOUR API KEY" project.id="YOUR CLIENT ID" client.email="YOUR CLIENT EMAIL"</code></p>
-<h1 id="how-it-works">How It Works</h1>
-<h2 id="architecture-overview">Architecture Overview</h2>
-<ul>
-<li>
-<p>React front-end, built via create-react-app</p>
-<ul>
-<li>
-  - Firebase Web - Internal app authentication &amp; CRUD operations
-<ul>
-<li>    - Authentication - Firebase auth listener that triggers userReducer actions managed in <code>`client\src\App.js</code></li>
-</ul>
-</li>
-<li><a href="https://chakra-ui.com/docs/features/style-props">Chakra UI</a>) - Very flexible UI framework
-<ul>
-<li><a href="https://chakra-ui.com/docs/features/style-props">Style Props</a>) - Tailwindcss-like utility inline styling</li>
-<li>Theming extended from <code>`client\src\Styles\theme.js</code></li>
-<li>Create custom Components like <code>`client\src\Styles\Components\NavLink.js</code></li>
-</ul>
-</li>
-<li><a href="">React-Router-Dom</a>]() - Defined in <code>`client\src\Routes</code></li>
-<li><a href="https://redux-toolkit.js.org/">Redux-Toolkit</a>) - Authentication managed through Redux store
-<ul>
-<li>    - Reducers: <code>`client\src\Reducers</code></li>
-<li>Initalized: <code>`client\src\index.js</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Firebase Functions</p>
-<ul>
-<li>
-<p><a href="https://firebase.google.com/docs/functions/use-cases?authuser=0">What can I do with Cloud Functions?</a></p>
-</li>
-<li>
-<p>Trigger background functions (eg. <code>`Firebase.auth.user().onCreate((user) =&gt;> {...})</code>)</p>
-</li>
-<li>
-<p>Call functions directly from Web</p>
-<pre><code>// 1. `client\src\index.js` - Initialize Cloud Functions through Firebase
-firebase.initializeApp({ ... });
-var functions = firebase.functions();
+## Development Environment
+1. TODO
 
-// 2. `client\src\Components\TextComponent` - Load Firebase and call directly
-import Firebase from "firebase/app";
-var addMessage = Firebase.functions().httpsCallable('addMessage');
+## Production Environment
 
-addMessage({ text: messageText })
-.then((result) =&gt; {
->  // Read result of the Cloud Function.
-var sanitizedMessage = result.data.text;
-}).catch (error =     const { code, message, details } = error;
-})
+1. Set environment variables for Firebase functions using `functions ... :set ...`
+   ...
 
-</code></pre>
-</liCall functions via HTTP requests</p>
-<pre><code>// https://firebase.google.com/docs/functions/http-events?authuser=0
+# Deploying Application
 
-</code></pre>
-</li>
-<liHost API routes (Currently eg. <code>`/auth/shopify</code> and <code>/auth/shopifycallback</code>)</p>
-<ul>
-<li>Note: This probably should be done through calling Firebase Functions via HTTP, but shows some flexibility</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Firebase Firestore</p>
-<ul>
-<li>Document store</li>
-</ul>
-</li>
-<li>
-<p>Integrations</p>
-<ul>
-<li>Shopify - This boilerplate can serve as a grab-and-go Shopify Public App</li>
-</ul>
-</li>
-</ul>
-<h1 id="integrations">Integrations</h1>
-<h2 id="shopify">Shopify</h2>
-<p>
+## Deploy Frontend
+
+Files must build to a deployment directory (default is "public", changed to "client/build")
+Deploy files to hosting via `firebase deploy --only hosting:shopify-firebase-boilerplate`
+
+## Environment variables
+
+Environment variables for consumption by Firebase Functions:
+
+`firebase functions:config:get`
+
+`firebase functions:config:set private.env="dev" stripe.key="[stripe_key]" stripe.secret="[stripe_secret]"`
+
+`firebase functions:config:set private.key="YOUR API KEY" project.id="YOUR CLIENT ID" client.email="YOUR CLIENT EMAIL"`
+
+# How It Works
+
+## Architecture Overview
+
+- React front-end, built via create-react-app
+  - Firebase Web - Internal app authentication & CRUD operations
+    - Authentication - Firebase auth listener that triggers userReducer actions managed in `client\src\App.js`
+  - [Chakra UI](https://chakra-ui.com/docs/features/style-props) - Very flexible UI framework
+    - [Style Props](https://chakra-ui.com/docs/features/style-props) - Tailwindcss-like utility inline styling
+    - Theming extended from `client\src\Styles\theme.js`
+    - Create custom Components like `client\src\Styles\Components\NavLink.js`
+  - [React-Router-Dom]() - Defined in `client\src\Routes`
+  - [Redux-Toolkit](https://redux-toolkit.js.org/) - Authentication managed through Redux store
+    - Reducers: `client\src\Reducers`
+    - Initalized: `client\src\index.js`
+- Firebase Functions
+
+  - [What can I do with Cloud Functions?](https://firebase.google.com/docs/functions/use-cases?authuser=0)
+  - Trigger background functions (eg. `Firebase.auth.user().onCreate((user) => {...})`)
+  - Call functions directly from Web
+
+    ```
+    // 1. `client\src\index.js` - Initialize Cloud Functions through Firebase
+    firebase.initializeApp({ ... });
+    var functions = firebase.functions();
+
+    // 2. `client\src\Components\TextComponent` - Load Firebase and call directly
+    import Firebase from "firebase/app";
+    var addMessage = Firebase.functions().httpsCallable('addMessage');
+
+    addMessage({ text: messageText })
+    .then((result) => {
+      // Read result of the Cloud Function.
+    var sanitizedMessage = result.data.text;
+    }).catch (error => {
+      const { code, message, details } = error;
+    })
+
+    ```
+
+  - Call functions via HTTP requests
+
+    ```
+    // https://firebase.google.com/docs/functions/http-events?authuser=0
+
+    ```
+
+  - Host API routes (Currently eg. `/auth/shopify` and `/auth/shopifycallback`)
+    - Note: This probably should be done through calling Firebase Functions via HTTP, but shows some flexibility
 
 - Firebase Firestore
   - Document store
@@ -161,23 +106,15 @@ var sanitizedMessage = result.data.text;
 # Integrations
 ## Shopify
 
-Shopify has a very nice app ecosystem. A Shopify app is simply a website that follows certain authentication protocols, so it’'s very flexible about any technologies you want to use. They have some great resources and walkthroughs as well.</p>
-<p>
+Shopify has a very nice app ecosystem. A Shopify app is simply a website that follows certain authentication protocols, so it's very flexible about any technologies you want to use. They have some great resources and walkthroughs as well.
 
-There are two types of Shopify apps:</p>
-<ul>
-<li> 
-- Public - An app listed on their App Store, available to the general public. Subscriptions, on-demand billing through Shopify</li>
-<li>
-- Private - An app not listed on their App Store, that you would provide to a single customer</li>
-</ul>
-<p>
+There are two types of Shopify apps: 
+- Public - An app listed on their App Store, available to the general public. Subscriptions, on-demand billing through Shopify
+- Private - An app not listed on their App Store, that you would provide to a single customer
 
-Shopify Integration Workflow</p>
-<p>
+Shopify Integration Workflow
 
-New Test!!</p>
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjU1NjE2MTBdfQ==
+eyJoaXN0b3J5IjpbLTE2MTI3MzQ4NTNdfQ==
 -->
