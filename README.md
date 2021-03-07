@@ -118,3 +118,102 @@ There are two types of Shopify apps:
 - Private - An app not listed on their App Store, that you would provide to a single customer
 
 Shopify Integration Workflow
+
+1. Create application through [Shopify Partner Program](https://www.shopify.com/partners)
+
+- App info: name, contact email, etc
+- URLs:
+  - App URL: `https://yourdomain.com/yourprojectid/us-central1/app/api/auth/shopify`
+  - Allowed redirection URL(s): `https://yourdomain.com/yourprojectid/us-central1/app/api/auth/shopify/callback`
+- Create API Key & API Secret Key
+- Extensions - Admin, Flow, Kit, Online Store, Point of Sale
+  - Eg. App proxy (Online Store)
+
+Installation Workflow:
+
+2. Shopify loads the OAuth grant screen, displaying your required scopes, waits for user confirmation
+
+3. OAuth grant screen redirects to App URL
+
+- On installation of the application, and any other time the user clicks the App from the merchant's Shopify Admin UI
+-
+
+Subsequent Navigation to App:
+
+4. Shopify routes to `${AppURL}?shop=shopname.myshopify.com&hmac=...&timestamp=...`
+
+- Shopify requires you to compile a URL and redirect to it
+- https://{shop}/admin/oauth/authorize?client_id={api_key}&scope={scopes}&redirect_uri={redirect_uri}&state={nonce}&grant_options[]={access_mode}
+- Part of this is a requirement to generate a `nonce` (random value) that I must cross reference in Shopify's callback, which we'll persist in `req.session`
+- We are using the `shopify-token` npm library that Shopify recommends, to simplify things quite a bit for us:
+
+```javascript
+// functions/api/auth.js
+router.get("/shopify", (req, res) => {
+  const shop = req.query.shop;
+  if (!shop) return res.status(401).send("Must provide a valid Shopify domain");
+  // 1. Initialize ShopifyToken
+
+  const shopifyToken = new ShopifyToken({
+    redirectUri: config.SHOPIFY_REDIRECT_URL,
+    sharedSecret: config.SHOPIFY_API_SECRET_KEY,
+    apiKey: config.SHOPIFY_API_KEY,
+    shop: req.query.shop,
+  });
+
+  // 2. Generate nonce
+  const nonce = shopifyToken.generateNonce();
+
+  // 3. Generate authorization URL
+  const uri = shopifyToken.generateAuthUrl(shop, "read_products", nonce);
+
+  // 4. Save the nonce to verify it later
+  req.session.state = nonce;
+  res.redirect(uri);
+});
+```
+
+5. Shopify responds to `${AppUrl}/callback?code=...&shop=...&state=...`
+
+- Here you have to verify the nonce (state) is the same that my app provided initially and the Hmac calculates out correctly
+- The `code` query parameter is then used to make a `POST` request to Shopify's oAuth route and exchange the authorization code for a permanent access token, which will allow us to authenticate to their store through the Shopify API
+- Again we use `shopify-token` to simplify things for us nicely
+- Once we have everything we need, we'll redirect to the frontend URL to the `/shopify-login` route, passing `shop` and `token` via query parameters
+
+```javascript
+router.get("/shopify/callback", (req, res) => {
+  const { code, shop, state } = req.query;
+  const shopifyToken = new ShopifyToken({ ... });
+
+  if (
+    typeof state !== "string" ||
+    state !== req.session.state || // Validate that the state (nonce) is the same
+    !shopifyToken.verifyHmac(req.query) // Validate the Hmac calculates properly
+  ) {
+    return res.status(400).send("Shopify integration security checks failed");
+  }
+
+  // Exchange the authorization code for a permanent access token.
+  shopifyToken
+    .getAccessToken(shop, code)
+    .then((data) => {
+      const token = data.access_token;
+      req.session.token = token;
+      req.session.state = undefined;
+      res.redirect(
+        `${config.CLIENT_URL}/shopify-login?shop=${shop}&token=${token}`
+      );
+    })
+    .catch((err) => {
+      ...
+      res.status(500).send("Something went wrong integrating to Shopify");
+    });
+});
+```
+
+6. Frontend ShopifyLogin component makes direct Firestore calls to persist the integration details for the user
+
+- Path to component: `client\src\Components\Auth\ShopifyLogin.js`
+- `/shopify-login` is a PrivateRoute, defined in `client\src\Routes`, that will require user to login or signup if they aren't already, and then forward the user onward, maintaining their "from" state
+- With the user info on-hand, the component queries Firestore for an exact, existing integration. If none exists, it creates it, if one does exist, it simply proceeds to the success handler
+- On success, redirect user to somewhere eg. "/"
