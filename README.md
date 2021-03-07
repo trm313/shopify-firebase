@@ -106,8 +106,9 @@ Environment variables for consumption by Firebase Functions:
 # Integrations
 ## Shopify
 
-The workflow for 
+Shopify has a very nice app ecosystem. A Shopify app is simply a website that follows certain authentication protocols, so it's very flexible about any technologies you want to use. They ha
+The workflow for a website to be 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTg5NjI0NzMwXX0=
+eyJoaXN0b3J5IjpbLTQ2NjAwNDczMF19
 -->
