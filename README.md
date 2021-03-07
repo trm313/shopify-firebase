@@ -110,9 +110,11 @@ Shopify has a very nice app ecosystem. A Shopify app is simply a website that fo
 
 There are two types of Shopify apps: 
 - Public - An app listed on their App Store, available to the general public. Subscriptions, on-demand billing through Shopify
-- Private - An app not listed on their App Store, that you would provide to a single customer that they manually manage the installation of
-The workflow for a website to be 
+- Private - An app not listed on their App Store, that you would provide to a single customer
+
+Shopify Integration Workflow
+
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjY3NzIwNTIwXX0=
+eyJoaXN0b3J5IjpbLTE2MTI3MzQ4NTNdfQ==
 -->
