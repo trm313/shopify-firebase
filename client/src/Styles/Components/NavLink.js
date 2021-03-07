@@ -1,26 +1,27 @@
+// Custom component, loaded by ../theme.js
+// Consumed via ../../Components/Shared/NavLink.js
+
 const NavLink = {
   // The styles all nav links have in common
   baseStyle: {
-    padding: "0.75em 1em",
-    fontSize: "1em",
     textDecoration: "none",
     color: "brand.800",
-    backgroundColor: "brand.200",
-    borderRadius: "0.5em",
-    margin: "auto 1em",
+    padding: "1em",
     _hover: {
       textDecoration: "none",
-      backgroundColor: "brand.300",
-      boxShadow: "lg",
+      opacity: "0.8",
+      // boxShadow: "lg",
     },
   },
   // Size options
   sizes: {
     sm: {
-      fontSize: "0.5em",
-      padding: "0.3em 0.5em",
+      fontSize: "0.8em",
+      padding: "0.5em 0.8em",
     },
-    md: {},
+    md: {
+      fontSize: "1em",
+    },
     lg: {
       fontSize: "1.2em",
       padding: "0.9em 1.75em",
@@ -33,8 +34,17 @@ const NavLink = {
       color: "white",
       boxShadow: "xl",
     },
-    secondary: {
-      // ...
+    secondary: {},
+    headerPrimary: {
+      color: ["brand.500", "brand.500", "white", "white"],
+      backgroundColor: ["white", "white", "brand.500", "brand.500"],
+      borderRadius: "lg",
+      _hover: {
+        backgroundColor: ["brand.100", "brand.100", "brand.600", "brand.600"],
+      },
+    },
+    headerSecondary: {
+      color: ["white", "white", "brand.500", "brand.500"],
     },
     link: {
       textDecoration: "underline",

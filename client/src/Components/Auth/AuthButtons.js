@@ -23,13 +23,17 @@ const AuthButtons = (props) => {
   if (isAuthenticated) {
     return (
       <>
-        <NavLink to='/account'>{user.email}</NavLink>
-        <NavLink onClick={logOut}>Log Out</NavLink>
+        <NavLink to='/account' variant='headerSecondary'>
+          {user.email}
+        </NavLink>
+        <NavLink onClick={logOut} variant='headerSecondary'>
+          Log Out
+        </NavLink>
       </>
     );
   } else {
     return (
-      <NavLink to='/login' size='lg' variant='primary'>
+      <NavLink to='/login' variant='headerPrimary'>
         Login
       </NavLink>
     );

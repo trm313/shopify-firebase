@@ -1,7 +1,7 @@
 // 1. Import useStyleConfig
 import { useStyleConfig } from "@chakra-ui/react";
 
-// Requirements to form the Element
+// To leverage react-router-dom through the Chakra Link component, need to pass it through
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "@chakra-ui/react";
 
