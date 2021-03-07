@@ -2,8 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Flex } from "@chakra-ui/react";
 
-// import Header from "./Header";
-import Header from "./Header2";
+import Header from "./Header";
 import LoadingScreen from "./LoadingScreen";
 
 const Layout = (props) => {

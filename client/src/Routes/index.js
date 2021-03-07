@@ -8,12 +8,9 @@ import { Switch, Route, Redirect } from "react-router-dom";
 // Pages
 import HomePage from "../Pages/HomePage";
 import Login from "../Pages/Login";
+import Account from "../Pages/Account";
 import ShopifyLogin from "../Components/Auth/ShopifyLogin";
-const Account = () => (
-  <div>
-    <h1>Account</h1>
-  </div>
-);
+
 const Post = () => (
   <div>
     <h1>Post</h1>

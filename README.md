@@ -136,7 +136,8 @@ There are two types of Shopify apps:
 3. OAuth grant screen redirects to App URL
 
 - On installation of the application, and any other time the user clicks the App from the merchant's Shopify Admin UI
-- **Subsequent Navigation to App:**
+
+**Subsequent Navigation to App:**
 
 4. Shopify routes to `${AppURL}?shop=shopname.myshopify.com&hmac=...&timestamp=...`
 
