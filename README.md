@@ -49,32 +49,37 @@ Environment variables for consumption by Firebase Functions:
 
 # How It Works
 
-## Tech Stack Overview
+## Architecture Overview
 
 - React front-end, built via create-react-app
-  - Firebase Web for internal app authentication & CRUD operations
+  - Firebase Web - Internal app authentication & CRUD operations
+    - Authentication - Firebase auth listener that triggers userReducer actions managed in `client\src\App.js`
+  - [Chakra UI](https://chakra-ui.com/docs/features/style-props) - Very flexible UI framework
+    - [Style Props](https://chakra-ui.com/docs/features/style-props) - Tailwindcss-like utility inline styling
+    - Theming extended from `client\src\Styles\theme.js`
+    - Create custom Components like `client\src\Styles\Components\NavLink.js`
+  - [React-Router-Dom]() - Defined in `client\src\Routes`
+  - [Redux-Toolkit](https://redux-toolkit.js.org/) - Authentication managed through Redux store
+    - Reducers: `client\src\Reducers`
+    - Initalized: `client\src\index.js`
 - Firebase Functions
 
-  - Useful triggers (eg. `...auth.user().onCreate((user) => {...})`)
-  - Call functions directly from Web - Initalize Cloud Functions into app
+  - [What can I do with Cloud Functions?](https://firebase.google.com/docs/functions/use-cases?authuser=0)
+  - Trigger background functions (eg. `Firebase.auth.user().onCreate((user) => {...})`)
+  - Call functions directly from Web
 
     ```
-    firebase.initializeApp({
-    apiKey: '### FIREBASE API KEY ###',
-    authDomain: '### FIREBASE AUTH DOMAIN ###',
-    projectId: '### CLOUD FUNCTIONS PROJECT ID ###'
-    databaseURL: 'https://### YOUR DATABASE NAME ###.firebaseio.com',
-    });
+    // 1. `client\src\index.js` - Initialize Cloud Functions through Firebase
+    firebase.initializeApp({ ... });
+    var functions = firebase.functions();
 
-        // Initialize Cloud Functions through Firebase
-        var functions = firebase.functions();
-
-        // ...
-        var addMessage = firebase.functions().httpsCallable('addMessage');
+    // 2. `client\src\Components\TextComponent` - Load Firebase and call directly
+    import Firebase from "firebase/app";
+    var addMessage = Firebase.functions().httpsCallable('addMessage');
 
     addMessage({ text: messageText })
     .then((result) => {
-    // Read result of the Cloud Function.
+      // Read result of the Cloud Function.
     var sanitizedMessage = result.data.text;
     }).catch (error => {
       const { code, message, details } = error;
@@ -83,8 +88,14 @@ Environment variables for consumption by Firebase Functions:
     ```
 
   - Call functions via HTTP requests
-  - Host API routes (eg. `/auth/shopify` and `/auth/shopifycallback`)
-    - Could also be done through calling Firebase Functions via HTTP
+
+    ```
+    // https://firebase.google.com/docs/functions/http-events?authuser=0
+
+    ```
+
+  - Host API routes (Currently eg. `/auth/shopify` and `/auth/shopifycallback`)
+    - Note: This probably should be done through calling Firebase Functions via HTTP, but shows some flexibility
 
 - Firebase Firestore
   - Document store
