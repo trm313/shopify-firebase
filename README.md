@@ -114,10 +114,10 @@ Shopify has a very nice app ecosystem. A Shopify app is simply a website that fo
 
 There are two types of Shopify apps:
 
-- Public - An app listed on their App Store, available to the general public. Subscriptions, on-demand billing through Shopify
-- Private - An app not listed on their App Store, that you would provide to a single customer
+- _Public_ - An app listed on their App Store, available to the general public. Subscriptions, on-demand billing through Shopify
+- _Private/Custom_ - An app not listed on their App Store, that you would provide to a single customer
 
-Shopify Integration Workflow
+**Shopify Integration Workflow**
 
 1. Create application through [Shopify Partner Program](https://www.shopify.com/partners)
 
@@ -129,16 +129,14 @@ Shopify Integration Workflow
 - Extensions - Admin, Flow, Kit, Online Store, Point of Sale
   - Eg. App proxy (Online Store)
 
-Installation Workflow:
+**Installation Workflow:**
 
 2. Shopify loads the OAuth grant screen, displaying your required scopes, waits for user confirmation
 
 3. OAuth grant screen redirects to App URL
 
 - On installation of the application, and any other time the user clicks the App from the merchant's Shopify Admin UI
--
-
-Subsequent Navigation to App:
+- **Subsequent Navigation to App:**
 
 4. Shopify routes to `${AppURL}?shop=shopname.myshopify.com&hmac=...&timestamp=...`
 
@@ -210,6 +208,8 @@ router.get("/shopify/callback", (req, res) => {
     });
 });
 ```
+
+**Integration Persistence**
 
 6. Frontend ShopifyLogin component makes direct Firestore calls to persist the integration details for the user
 
