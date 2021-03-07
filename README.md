@@ -101,8 +101,13 @@ Environment variables for consumption by Firebase Functions:
 - Firebase Firestore
   - Document store
 - Integrations
-	- Shopify App
+	- Shopify - This boilerplate can serve as a grab-and-go Shopify Public App
+
+# Integrations
+## Shopify
+
+The workflow for 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5ODUyMjUzMDFdfQ==
+eyJoaXN0b3J5IjpbNTg5NjI0NzMwXX0=
 -->
