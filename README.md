@@ -2,16 +2,16 @@
 
 ## Installation
 
-** Repo setup **
+**Repo setup**
 
 1. Clone repository
 1. Run `npm install` in the root, `client`, `scripts`, and `functions` directories
 
-** Shopify setup **
+**Shopify setup**
 
 1. ...
 
-** Firebase setup **
+**Firebase setup**
 
 1. Create your Firebase project. Resources we will be using:
 
@@ -24,6 +24,8 @@
 1. Copy/rename `client\.env.example` to `client\.env` and populate with environment variables to be leveraged by the React client (TODO: Figure out how to deploy these to Firebase hosting)
 
 ## Development Environment
+
+1. TODO
 
 ## Production Environment
 
@@ -99,3 +101,18 @@ Environment variables for consumption by Firebase Functions:
 
 - Firebase Firestore
   - Document store
+- Integrations
+  - Shopify - This boilerplate can serve as a grab-and-go Shopify Public App
+
+# Integrations
+
+## Shopify
+
+Shopify has a very nice app ecosystem. A Shopify app is simply a website that follows certain authentication protocols, so it's very flexible about any technologies you want to use. They have some great resources and walkthroughs as well.
+
+There are two types of Shopify apps:
+
+- Public - An app listed on their App Store, available to the general public. Subscriptions, on-demand billing through Shopify
+- Private - An app not listed on their App Store, that you would provide to a single customer
+
+Shopify Integration Workflow
