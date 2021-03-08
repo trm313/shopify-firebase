@@ -23,7 +23,7 @@ const Account = () => {
   const auth = useSelector((store) => store.auth);
 
   return (
-    <Flex direction='column'>
+    <Flex direction='column' w='100%' maxW='5xl' mx='auto'>
       <Box>
         <Heading>Account</Heading>
         <Text>Email: {auth.user.email}</Text>
