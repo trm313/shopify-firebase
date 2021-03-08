@@ -12,6 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { Redirect } from "react-router-dom";
 
+import ErrorAlert from "../Shared/Errors/ErrorAlert";
+
 const LoadingScreen = ({
   children,
   text = "Loading",
@@ -56,13 +58,11 @@ const LoadingScreen = ({
         </>
       )}
       {error && (
-        <Alert status='error' color='gray.800' w='auto'>
-          <AlertIcon />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>{`${error}. Redirecting in ${
+        <ErrorAlert
+          description={`${error}. Redirecting in ${
             redirectTimer / 1000
-          } seconds.`}</AlertDescription>
-        </Alert>
+          } seconds.`}
+        />
       )}
       {error && errorRedirectTo && redirectTimer === 0 && (
         <Redirect to={errorRedirectTo} />
