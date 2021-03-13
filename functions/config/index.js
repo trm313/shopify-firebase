@@ -6,9 +6,10 @@ const development = require("./development");
 // Set environment variables using scripts in functions/package.json
 // Local environment variables are set in .runtimeconfig.json (see .runtimeconfig.json.example for structure)
 let env = functions.config();
-
+// TODO: Drop all this - just export functions.get() directly, call it more normally around
 const config = {
-  SHOPIFY_API_KEY: env.shopify.api_key,
+  SHOPIFY_SCOPES: env.shopify.scopes || "read_products,read_customers",
+  SHOPIFY_API_KEY: env.shopify.api_key || "--shopify.api_key--",
   SHOPIFY_API_SECRET_KEY: env.shopify.api_secret_key,
   SHOPIFY_REDIRECT_URL: env.shopify.redirect_url,
   CLIENT_URL: env.app.client_url,

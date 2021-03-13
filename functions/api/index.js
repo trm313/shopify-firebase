@@ -7,4 +7,7 @@ router.use("/test", testRoute);
 const authRoute = require("./auth");
 router.use("/auth", authRoute);
 
+const widgetsRoute = require("./widgets");
+router.use("/widgets", widgetsRoute);
+
 module.exports = router;

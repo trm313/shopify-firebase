@@ -25,7 +25,7 @@ router.get("/shopify", (req, res) => {
   const nonce = shopifyToken.generateNonce();
 
   // 2. Generate authorization URL
-  const uri = shopifyToken.generateAuthUrl(shop, "read_products", nonce);
+  const uri = shopifyToken.generateAuthUrl(shop, config.SHOPIFY_SCOPES, nonce);
 
   // 3. Save the nonce to verify it later
   req.session.state = nonce;
