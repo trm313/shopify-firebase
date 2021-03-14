@@ -18,9 +18,9 @@ const LikeButton = ({ id }) => {
 // Loading this script is general, it'll identify relevant widgets on page and populate them
 // So one script can be used for multiple widgets on page
 
-let elements = document.querySelectorAll("[class*=appname");
+let pageElements = document.querySelectorAll("[class*=appname-react_");
 
-elements.forEach((element) => {
+pageElements.forEach((element) => {
   let references = element.className.split("_");
   // TODO: Sanitize these, make sure they're strings, etc.
   let widget = references[1]; //  test

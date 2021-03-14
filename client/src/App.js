@@ -33,11 +33,11 @@ const App = ({ authenticate, logout }) => {
     <FirestoreProvider firebase={Firebase}>
       <ChakraProvider theme={theme}>
         <BrowserRouter>
-          <Layout>
-            {/* <Route path='/' component={ScrollToTop} />
+          {/* <Layout> */}
+          {/* <Route path='/' component={ScrollToTop} />
           <Route path='/' component={Analytics} /> */}
-            <Routes />
-          </Layout>
+          <Routes />
+          {/* </Layout> */}
         </BrowserRouter>
       </ChakraProvider>
     </FirestoreProvider>
