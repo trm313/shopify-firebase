@@ -1,5 +1,6 @@
 console.log("widgets-iframe.js");
 
+// TODO: Should scope everything to functions, otherwise elements becomes a global variable client-side, can interfere with other loose scripts
 let elements = document.querySelectorAll("[class*=appname_");
 elements.forEach((element) => {
   let references = element.className.split("_");
