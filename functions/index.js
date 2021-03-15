@@ -20,9 +20,6 @@ app.use(
 const apiRoutes = require("./api");
 app.use("/api", apiRoutes);
 
-const scriptRoutes = require("./scripts");
-app.use("/scripts", scriptRoutes);
-
 /* Functions */
 // Create and Deploy Your First Cloud Functions
 // https://firebase.google.com/docs/functions/write-firebase-functions
