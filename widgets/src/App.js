@@ -2,6 +2,8 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
+// Widgets
+import ExampleWidget from "./ExampleWidget";
 const InstagramFeed = ({ id }) => {
   return (
     <div>
@@ -30,6 +32,9 @@ function App({ domElement }) {
   }
   if (widgetType === "REDDITPOSTS") {
     return <RedditPosts id={id} />;
+  }
+  if (widgetType === "EXAMPLEWIDGET") {
+    return <ExampleWidget id={id} />;
   }
 
   return;

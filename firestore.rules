@@ -7,6 +7,12 @@ service cloud.firestore {
       allow update, delete: if request.auth.uid == resource.data.ownerUid;
     }
 
+    match /exampleWidget/{exampleWidget} {
+      allow read: if true;
+      allow create: if request.auth.uid == request.resource.data.createdBy;
+      allow update, delete: if request.auth.uid == resource.data.createdBy;
+    }
+
     match /posts/{post} {
       allow read: if true;
       allow create: if request.auth.uid == request.resource.data.createdBy;
