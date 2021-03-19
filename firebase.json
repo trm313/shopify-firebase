@@ -8,7 +8,7 @@
     "source": "functions"
   },
   "hosting": {
-    "site": "hubbubapps",
+    "site": "shopifyappfirefly",
     "public": "client/build",
     "rewrites": [
       {

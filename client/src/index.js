@@ -16,9 +16,9 @@ import rootReducer from "./Reducers";
 // Firebase Web App Config
 // NOTE: None of these are sensitive, these are intended for client-side consumption
 const dbConfig = {
-  apiKey: "AIzaSyAGfBRl69BJS6JQ1PTR5dKWlHEmKql8kNY",
-  authDomain: "hubbubapps.firebaseapp.com",
-  projectId: "hubbubapps",
+  apiKey: "AIzaSyBmL0qM20olj3JTh0OnLjGwTmTKrcOxy5A",
+  authDomain: "shopifyappfirefly.firebaseapp.com",
+  projectId: "shopifyappfirefly",
 };
 Firebase.initializeApp(dbConfig);
 
