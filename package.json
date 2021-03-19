@@ -6,9 +6,12 @@
   "scripts": {
     "start:client": "cd client && npm start",
     "start:functions": "cd functions && npm run serve",
+    "build": "cd client && npm run build",
     "ngrok:functions": "ngrok http 5001",
-    "deploy:client": "firebase deploy --only hosting:shopify-firebase-boilerplate",
-    "deploy:functions": "firebase deploy --only functions"
+    "deploy:client": "npm run build && firebase deploy --only hosting",
+    "deploy:functions": "firebase deploy --only functions",
+    "install:client": "cd client && npm install",
+    "install:functions": "cd functions && npm install"
   },
   "keywords": [],
   "author": "",

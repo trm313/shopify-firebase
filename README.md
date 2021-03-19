@@ -218,5 +218,3 @@ router.get("/shopify/callback", (req, res) => {
 - `/shopify-login` is a PrivateRoute, defined in `client\src\Routes`, that will require user to login or signup if they aren't already, and then forward the user onward, maintaining their "from" state
 - With the user info on-hand, the component queries Firestore for an exact, existing integration. If none exists, it creates it, if one does exist, it simply proceeds to the success handler
 - On success, redirect user to somewhere eg. "/"
-
-... TBD
