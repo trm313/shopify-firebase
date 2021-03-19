@@ -1,7 +1,7 @@
 // the main routes of our app are defined here using react-router
 // https://reacttraining.com/react-router/web/example/basic
 
-import React, { Component } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
 

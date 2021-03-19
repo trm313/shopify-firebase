@@ -1,5 +1,5 @@
 import Firebase from "firebase/app";
-import ReactGA from "react-ga";
+// import ReactGA from "react-ga";
 
 const removeIntegration = (id) => {
   Firebase.firestore()

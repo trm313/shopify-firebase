@@ -1,9 +1,9 @@
 import Firebase from "firebase/app";
 import { FirestoreProvider } from "react-firestore";
-import React, { useState, useEffect } from "react";
-import { useSelector, connect } from "react-redux";
-import ReactGA from "react-ga";
-import { BrowserRouter, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+// import ReactGA from "react-ga";
+import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 
 import { authenticate, logout } from "./Reducers/authReducer";
@@ -11,7 +11,7 @@ import { authenticate, logout } from "./Reducers/authReducer";
 import theme from "./Styles/theme";
 
 import Routes from "./Routes";
-import Layout from "./Components/Layout";
+// import Layout from "./Components/Layout";
 
 import "./App.css";
 
@@ -28,7 +28,7 @@ const App = ({ authenticate, logout }) => {
         logout();
       }
     });
-  }, []);
+  }, [authenticate, logout]);
   return (
     <FirestoreProvider firebase={Firebase}>
       <ChakraProvider theme={theme}>

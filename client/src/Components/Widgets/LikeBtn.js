@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex, Button, Icon, Text } from "@chakra-ui/react";
+import { Flex, Button, Text } from "@chakra-ui/react";
 
-import getWidgetConfiguration from "../../Actions/Widgets/getWidgetConfiguration";
+// import getWidgetConfiguration from "../../Actions/Widgets/getWidgetConfiguration";
 
 const LikeButton = ({ id }) => {
   const [liked, setLiked] = useState(false);
@@ -10,7 +10,7 @@ const LikeButton = ({ id }) => {
 
   useEffect(() => {
     // On load, get configuration data for widget
-    let config = getWidgetConfiguration({ id, collection: "widgetLikeBtn" });
+    // let config = getWidgetConfiguration({ id, collection: "widgetLikeBtn" });
   }, []);
 
   return (

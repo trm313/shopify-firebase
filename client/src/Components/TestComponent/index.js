@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useEffect } from "react";
 import Firebase from "firebase/app";
 import { FirestoreCollection } from "react-firestore";
 
@@ -6,7 +6,7 @@ import { Spinner } from "@chakra-ui/react";
 import NavLink from "../Shared/NavLink";
 
 const TestComponent = (props) => {
-  const [posts, setPosts] = useState(null);
+  // const [posts, setPosts] = useState(null);
 
   useEffect(() => {
     const testFetchFromFirestore = (collection = "posts") => {

@@ -1,15 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Box,
-  Flex,
-  Spinner,
-  Text,
-  Heading,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-} from "@chakra-ui/react";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
 import { Redirect } from "react-router-dom";
 
 import ErrorAlert from "../Shared/Errors/ErrorAlert";
@@ -33,7 +23,7 @@ const LoadingScreen = ({
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [error, redirectTimer]);
+  }, [error, redirectTimer, errorRedirectTo]);
 
   return (
     <Flex

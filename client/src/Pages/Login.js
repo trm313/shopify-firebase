@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { Box, Flex, Text, Heading, Spacer } from "@chakra-ui/react";
+import { Flex, Text, Heading } from "@chakra-ui/react";
 import NavLink from "../Components/Shared/NavLink";
 
 import logIn from "../Actions/logIn";
@@ -25,7 +25,7 @@ const Login = (props) => {
       }
       setRedirectTo(path);
     }
-  }, [auth]);
+  }, [auth, props.location?.state?.from]);
 
   return (
     <Flex w='100vw' h='100vh' position='absolute' top={0} left={0}>

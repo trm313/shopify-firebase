@@ -9,19 +9,16 @@ import { configureStore } from "@reduxjs/toolkit";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import ReactGA from "react-ga";
+// import ReactGA from "react-ga";
 
 import rootReducer from "./Reducers";
 
-console.log("create-react-app env:", process.env.NODE_ENV);
-console.log("firefly project:", process.env.REACT_APP_ENV);
-console.log(process.env);
-
-// Firebase
+// Firebase Web App Config
+// NOTE: None of these are sensitive, these are intended for client-side consumption
 const dbConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  apiKey: "AIzaSyAGfBRl69BJS6JQ1PTR5dKWlHEmKql8kNY",
+  authDomain: "hubbubapps.firebaseapp.com",
+  projectId: "hubbubapps",
 };
 Firebase.initializeApp(dbConfig);
 

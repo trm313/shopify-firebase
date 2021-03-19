@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { FirestoreCollection } from "react-firestore";
 
-import removeIntegration from "../Actions/Integrations/removeIntegration";
-
-import { MdDelete } from "react-icons/md";
+// import { MdDelete } from "react-icons/md";
 import {
   Box,
-  Button,
-  IconButton,
   Flex,
   Heading,
   Text,
@@ -23,6 +19,8 @@ import Integrations from "../Components/Integrations/Integrations";
 
 const Account = () => {
   const auth = useSelector((store) => store.auth);
+
+  console.log("Account", auth);
 
   return (
     <Layout>

@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Box, Flex, Text, Button, Icon } from "@chakra-ui/react";
+import { Box, Flex, Icon } from "@chakra-ui/react";
 import { MdMenu, MdClose } from "react-icons/md";
 import NavLink from "../Shared/NavLink";
 import AuthButtons from "../Auth/AuthButtons";

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import logOut from "../../Actions/logOut";
-import { Flex, Box, Button, Link, Spinner } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import NavLink from "../Shared/NavLink";
 
 const AuthButtons = (props) => {

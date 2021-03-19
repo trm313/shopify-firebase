@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 // Widgets
 import LikeBtn from "../Components/Widgets/LikeBtn";

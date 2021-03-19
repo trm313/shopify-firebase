@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { format, formatDistance, formatRelative, subDays } from "date-fns";
-import { MdDelete, MdWarning } from "react-icons/md";
+import { formatDistance, subDays } from "date-fns";
+import { MdDelete } from "react-icons/md";
 import {
   Avatar,
   Box,
